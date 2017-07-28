@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Update everything
-yum update -y --exclude=WALinuxAgent
+yum -y update
 
 # Install Java
 yum -y install java-1.8.0-openjdk.x86_64

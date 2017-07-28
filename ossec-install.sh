@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Update everything
-yum update -y --exclude=WALinuxAgent
+yum -y update
 yum -y install curl
 
 # Install ossec repo
