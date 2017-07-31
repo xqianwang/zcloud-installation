@@ -5,7 +5,7 @@ yum update -y --exclude=WALinuxAgent
 yum -y install curl
 
 # Install ossec repo
-cat > /etc/yum.repos.d/wazuh.repo << EOF
+cat > /etc/yum.repos.d/wazuh.repo <<\EOF
 [wazuh_repo]
 gpgcheck=1
 gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH

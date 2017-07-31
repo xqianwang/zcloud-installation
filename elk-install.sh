@@ -8,7 +8,7 @@ yum -y install java-1.8.0-openjdk.x86_64
 
 # Install Elsticsearch repo
 rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
-cat > /etc/yum.repos.d/elasticsearch.repo << EOF
+cat > /etc/yum.repos.d/elasticsearch.repo <<\EOF
 [elasticsearch-5.x]
 name=Elasticsearch repository for 5.x packages
 baseurl=https://artifacts.elastic.co/packages/5.x/yum
@@ -28,7 +28,7 @@ systemctl enable elasticsearch.service
 systemctl start elasticsearch.service
 
 # Install Kibana repo
-cat > /etc/yum.repos.d/kibana.repo << EOF
+cat > /etc/yum.repos.d/kibana.repo <<\EOF
 [kibana-5.x]
 name=Kibana repository for 5.x packages
 baseurl=https://artifacts.elastic.co/packages/5.x/yum
@@ -48,7 +48,7 @@ systemctl enable kibana.service
 systemctl start kibana.service
 
 # Install Logstash repo
-cat > /etc/yum.repos.d/logstash.repo << EOF
+cat > /etc/yum.repos.d/logstash.repo <<\EOF
 [logstash-5.x]
 name=Elastic repository for 5.x packages
 baseurl=https://artifacts.elastic.co/packages/5.x/yum
@@ -64,7 +64,7 @@ yum -y install logstash
 
 # Configure Logstash
 mkdir -p /etc/logstash/conf.d
-cat > /etc/logstash/conf.d/input-beats.conf << EOF
+cat > /etc/logstash/conf.d/input-beats.conf <<\EOF
 input {
    beats {
      type => beats
@@ -74,7 +74,7 @@ input {
 }
 EOF
 
-cat > /etc/logstash/conf.d/filters.conf << EOF
+cat > /etc/logstash/conf.d/filters.conf <<\EOF
 filter {
     multiline {
         max_age => 10
@@ -98,7 +98,7 @@ filter {
 }
 EOF
 
-cat > /etc/logstash/conf.d/output.conf << EOF
+cat > /etc/logstash/conf.d/output.conf <<\EOF
 output {
   elasticsearch {
     hosts => "localhost:9200"
