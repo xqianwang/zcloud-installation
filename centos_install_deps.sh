@@ -1,12 +1,5 @@
 #!/bin/bash
 
-sed -i 's/requiretty/!requiretty/g' /etc/sudoers
-
-echo "Install dependencies"
-
-yum install epel-release -y
-yum install wget git net-tools bind-utils iptables-services bridge-utils bash-completion yum-utils ansible docker -y
-
 echo "Configure docker device marrer"
 DOCKERVG=$( parted -m /dev/sda print all 2>/dev/null | grep unknown | grep /dev/sd | head -1 | cut -d':' -f1 )
 echo "DEVS=${DOCKERVG}" >> /etc/sysconfig/docker-storage-setup
@@ -21,7 +14,8 @@ else
    exit 3
 fi
 
-systemctl enable docker
 systemctl start docker
+
+echo "Docker started!"
 
 echo "Installation finished"
