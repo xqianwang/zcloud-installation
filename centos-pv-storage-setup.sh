@@ -24,6 +24,6 @@ if [ -z $ID ]; then
   ID=$(uuidgen)
 fi
 
-echo "UUID=$ID    /pgsql    xfs    defaults,nofail    1    2"
+echo "UUID=$ID    /pgsql    xfs    defaults,nofail    1    2" >> /etc/fstab
 
 echo "INFO: Configuration finished!"
