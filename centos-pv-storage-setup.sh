@@ -18,6 +18,13 @@ fi
 sudo mkdir -p /pgsql
 
 sudo mkfs -t xfs /dev/sdc1
+
+ID=$(blkid | grep $PARTITION | grep -oP 'UUID="\K[^"]+')
+if [ -z $ID ]; then
+  ID=$(uuidgen)
+fi
+echo "UUID=$ID    /pgsql    xfs    defaults,nofail    1    2" >> /etc/fstab
+
 sudo mount $PARTITION /pgsql && sudo chown -R 26:26 /pgsql
 
 if [ $? -eq 0 ]; then
@@ -26,12 +33,5 @@ else
   echo "Something wrong with mounting"
   exit 7
 fi
-
-ID=$(blkid | grep $PARTITION | grep -oP 'UUID="\K[^"]+')
-if [ -z $ID ]; then
-  ID=$(uuidgen)
-fi
-
-echo "UUID=$ID    /pgsql    xfs    defaults,nofail    1    2" >> /etc/fstab
 
 echo "INFO: Configuration finished!"
