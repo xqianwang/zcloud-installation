@@ -20,6 +20,12 @@ sudo mkdir -p /pgsql
 sudo mkfs -t xfs /dev/sdc1
 sudo mount $PARTITION /pgsql && sudo chown -R 26:26 /pgsql
 
+if [ $? -eq 0 ]; then
+  echo "Mounting successfully."
+else
+  echo "Something wrong with mounting"
+  exit 7
+fi
 
 ID=$(blkid | grep $PARTITION | grep -oP 'UUID="\K[^"]+')
 if [ -z $ID ]; then
