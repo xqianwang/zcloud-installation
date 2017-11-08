@@ -2,9 +2,9 @@
 
 echo "INFO: Configuring cloud storage for postgres now."
 
-PG_DISK=$(lsscsi | grep \:6\] | awk '{print $7}')
+PG_DISK=$(sudo -i lsscsi | grep \:6\] | awk '{print $7}')
 
-PARTITION=$(fdisk -l $PG_DISK | grep ${PG_DISK}1 | awk '{print $1}')
+PARTITION=$(sudo fdisk -l $PG_DISK | grep ${PG_DISK}1 | awk '{print $1}')
 
 if [ $? -ne 0 ]; then
   if [ -z $PARTITION ]; then
