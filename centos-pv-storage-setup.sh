@@ -12,7 +12,7 @@ if [ $? -eq 0 ]; then
   fi
 else
   echo "ERROR: Error for configuring storage."
-  exit 8
+  exit 6
 fi
 
 sudo mkdir -p /pgsql
