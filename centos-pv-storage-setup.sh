@@ -15,9 +15,11 @@ else
   exit 6
 fi
 
-mkdir -p /pgsql
+sudo mkdir -p /pgsql
 
-mount $PARTITION /pgsql && chown -R 26:26 /pgsql
+sudo mkfs -t xfs /dev/sdc1
+sudo mount $PARTITION /pgsql && sudo chown -R 26:26 /pgsql
+
 
 ID=$(blkid | grep $PARTITION | grep -oP 'UUID="\K[^"]+')
 if [ -z $ID ]; then
