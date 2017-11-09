@@ -8,7 +8,7 @@ PARTITION=$(sudo fdisk -l $PG_DISK | grep ${PG_DISK}1 | awk '{print $1}')
 
 if [ $? -eq 0 ]; then
   if [ -z $PARTITION ]; then
-    echo -e "n\np\n1\n\n\nt\nc\na\n1\nw" | fdisk $PG_DISK
+    echo -e "n\np\n1\n\n\na\nw" | fdisk $PG_DISK
   fi
 else
   echo "ERROR: Error for configuring storage."
