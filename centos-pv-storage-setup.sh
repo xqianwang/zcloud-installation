@@ -21,7 +21,7 @@ fi
 
 sudo mkdir -p /pgsql
 
-sudo mkfs -t xfs /dev/sdc1
+sudo mkfs -t xfs $PARTITION
 
 ID=$(blkid | grep $PARTITION | grep -oP 'UUID="\K[^"]+')
 if [ -z $ID ]; then
