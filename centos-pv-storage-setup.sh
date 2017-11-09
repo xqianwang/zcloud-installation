@@ -2,9 +2,9 @@
 
 echo "INFO: Configuring cloud storage for postgres now."
 
-PG_DISK=$(sudo -i lsscsi | grep \:6\] | awk '{print $7}')
+PG_DISK=$(lsscsi | grep \:6\] | awk '{print $7}')
 
-PARTITION=$(sudo fdisk -l $PG_DISK | grep ${PG_DISK}1 | awk '{print $1}')
+PARTITION=$(fdisk -l $PG_DISK | grep ${PG_DISK}1 | awk '{print $1}')
 
 if [ $? -eq 0 ]; then
   if [ -z $PARTITION ]; then
@@ -18,7 +18,7 @@ if [ $? -eq 0 ]; then
         echo "Creating lvm 1 failed!"
         exit 5
       else
-        PARTITION=$(sudo fdisk -l $PG_DISK | grep ${PG_DISK}1 | awk '{print $1}')
+        PARTITION=$(fdisk -l $PG_DISK | grep ${PG_DISK}1 | awk '{print $1}')
       fi
     fi
   fi
@@ -27,9 +27,9 @@ else
   exit 6
 fi
 
-sudo mkdir -p /pgsql
+mkdir -p /pgsql
 
-sudo mkfs -t xfs $PARTITION
+mkfs -t xfs $PARTITION
 
 ID=$(blkid | grep $PARTITION | grep -oP 'UUID="\K[^"]+')
 if [ -z $ID ]; then
@@ -37,7 +37,7 @@ if [ -z $ID ]; then
 fi
 echo "UUID=$ID    /pgsql    xfs    defaults,nofail    1    2" >> /etc/fstab
 
-sudo mount $PARTITION /pgsql && sudo chown -R 26:26 /pgsql
+mount $PARTITION /pgsql && chown -R 26:26 /pgsql
 
 if [ $? -eq 0 ]; then
   echo "Mounting successfully."
