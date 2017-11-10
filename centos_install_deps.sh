@@ -3,6 +3,7 @@
 sed -i 's/requiretty/!requiretty/g' /etc/sudoers
 
 echo "HOSTNAME=`hostname -f`" >> /etc/sysconfig/network
+systemctl restart network
 
 echo "Configure docker device mapper"
 
