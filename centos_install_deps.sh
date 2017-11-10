@@ -2,6 +2,7 @@
 
 sed -i 's/requiretty/!requiretty/g' /etc/sudoers
 
+sed -i '/^HOSTNAME/d' /etc/sysconfig/network
 echo "HOSTNAME=`hostname -f`" >> /etc/sysconfig/network
 systemctl restart network
 
