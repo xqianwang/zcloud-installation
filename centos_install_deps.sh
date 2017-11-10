@@ -2,6 +2,8 @@
 
 sed -i 's/requiretty/!requiretty/g' /etc/sudoers
 
+echo "HOSTNAME=`hostname -f`" >> /etc/sysconfig/network
+
 echo "Configure docker device mapper"
 
 DOCKERVG=$(lsscsi | grep \:5\] | awk '{print $7}')
