@@ -29,6 +29,11 @@ sed -i 's/NM_CONTROLLED=no/NM_CONTROLLED=yes/g'  /etc/sysconfig/network-scripts/
 systemctl enable NetworkManager.service
 systemctl restart NetworkManager.service
 
+if [ $? -ne 0 ]; then
+   echo "Error: Cannot configure NetworkManager!"
+   exit 4
+fi
+
 mkdir -p /etc/origin/node/
 echo "server 168.63.129.16" > /etc/origin/node/resolv.conf
 
