@@ -23,4 +23,13 @@ fi
 systemctl enable docker
 systemctl start docker
 
+echo "Configuring network now!"
+
+sed -i 's/NM_CONTROLLED=no/NM_CONTROLLED=yes/g'  /etc/sysconfig/network-scripts/ifcfg-eth0
+systemctl enable NetworkManager.service
+systemctl start NetworkManager.service
+
+mkdir -p /etc/origin/node/
+echo "server 168.63.129.16" > /etc/origin/node/resolv.conf
+
 echo "Installation finished"
