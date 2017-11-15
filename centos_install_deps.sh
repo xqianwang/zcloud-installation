@@ -25,9 +25,6 @@ systemctl start docker
 
 echo "Configuring network now!"
 
-sed -i '/^HOSTNAME/d' /etc/sysconfig/network
-echo "HOSTNAME=`hostname -f`" > /etc/sysconfig/network
-sudo systemctl restart network
 sed -i 's/NM_CONTROLLED=no/NM_CONTROLLED=yes/g'  /etc/sysconfig/network-scripts/ifcfg-eth0
 systemctl enable NetworkManager.service
 systemctl restart NetworkManager.service
@@ -35,6 +32,15 @@ systemctl restart NetworkManager.service
 if [ $? -ne 0 ]; then
    echo "Error: Cannot configure NetworkManager!"
    exit 4
+fi
+
+sed -i '/^HOSTNAME/d' /etc/sysconfig/network
+echo "HOSTNAME=`hostname -f`" > /etc/sysconfig/network
+sudo systemctl restart network
+
+if [ $? -ne 0 ]; then
+   echo "Error: Cannot restart network service!"
+   exit 5
 fi
 
 mkdir -p /etc/origin/node/
