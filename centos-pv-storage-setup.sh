@@ -13,7 +13,7 @@ if [ $? -eq 0 ]; then
       echo "Creating partition table failed!"
       exit 4
     else
-      parted /dev/sdc mkpart primary xfs 0% 100%
+      parted $PG_DISK mkpart primary xfs 0% 100%
       if [ $? -ne 0 ]; then
         echo "Creating lvm 1 failed!"
         exit 5
