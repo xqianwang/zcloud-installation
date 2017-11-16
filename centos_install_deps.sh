@@ -2,8 +2,9 @@
 
 sed -i 's/requiretty/!requiretty/g' /etc/sudoers
 
-yum install epel-release -y
+yum install epel-release -y && yum clean all
 yum install wget git net-tools bind-utils iptables-services bridge-utils bash-completion yum-utils ansible docker -y
+rm -rf /var/cache/yum
 
 echo "Configure docker device mapper"
 
