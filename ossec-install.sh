@@ -112,7 +112,7 @@ EOF
 
 #Change yum repo
 rm -f /etc/yum.repos.d/*
-setup_yum_repo $4 > /etc/yum.repos.d/CentOS-Artifactory.repo
+setup_yum_repo $5 > /etc/yum.repos.d/CentOS-Artifactory.repo
 setup_openlogic_gpgkey > /etc/pki/rpm-gpg/OpenLogic-GPG-KEY
 setup_docker_gpgkey > /etc/pki/rpm-gpg/Docker-GPG-KEY
 
