@@ -32,7 +32,7 @@ gpgkey=file:///etc/pki/rpm-gpg/Docker-GPG-KEY
 #openlogic
 [openlogic]
 name=OpenLogic releases
-baseurl=https://yum:$1@artifactory.zcloudcentral.com/artifactory/openlogic/7/openlogic/x86_64/
+baseurl=https://yum:$1@artifactory.zcloudcentral.com/artifactory/openlogic/7.4.1708/openlogic/x86_64/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/OpenLogic-GPG-KEY
 
