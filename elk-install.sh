@@ -166,9 +166,9 @@ yum -y install java-1.8.0-openjdk.x86_64
 # Install Elsticsearch repo
 rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 cat > /etc/yum.repos.d/elasticsearch.repo <<\EOF
-[elasticsearch-5.x]
-name=Elasticsearch repository for 5.x packages
-baseurl=https://artifacts.elastic.co/packages/5.x/yum
+[elasticsearch-6.x]
+name=Elasticsearch repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
 gpgcheck=1
 gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 enabled=1
@@ -186,9 +186,9 @@ systemctl start elasticsearch.service
 
 # Install Kibana repo
 cat > /etc/yum.repos.d/kibana.repo <<\EOF
-[kibana-5.x]
-name=Kibana repository for 5.x packages
-baseurl=https://artifacts.elastic.co/packages/5.x/yum
+[kibana-6.x]
+name=Kibana repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
 gpgcheck=1
 gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 enabled=1
@@ -206,9 +206,9 @@ systemctl start kibana.service
 
 # Install Logstash repo
 cat > /etc/yum.repos.d/logstash.repo <<\EOF
-[logstash-5.x]
-name=Elastic repository for 5.x packages
-baseurl=https://artifacts.elastic.co/packages/5.x/yum
+[logstash-6.x]
+name=Elastic repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
 gpgcheck=1
 gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 enabled=1
