@@ -350,6 +350,6 @@ setup_elk_gpgkey > /etc/pki/rpm-gpg/ELK-GPG-KEY
 setup_wazuh_gpgkey > /etc/pki/rpm-gpg/GPG-KEY-WAZUH
 setup_nodejs_gpgkey > /etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
 
-yum -y install yum-utils curl filebeat
+yum -qy install yum-utils curl filebeat
 
 echo "Yum repos configured."
