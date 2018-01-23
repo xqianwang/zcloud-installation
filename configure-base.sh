@@ -358,10 +358,9 @@ rpm --import /etc/pki/rpm-gpg/ELK-GPG-KEY
 rpm --import /etc/pki/rpm-gpg/GPG-KEY-WAZUH
 rpm --import /etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
 
-yum -qy install yum-utils curl net-tools bind-utils bash-completion hping3 iptraf-ng iotop
+yum -qy install yum-utils curl wget net-tools bind-utils bash-completion hping3 iptraf-ng iotop
 
 # Install and configure FileBeat
-
 yum -qy install filebeat
 curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/filebeat/filebeat.yml
 
