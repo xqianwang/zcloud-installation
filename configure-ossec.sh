@@ -133,7 +133,7 @@ systemctl start ossec-authd.service
 yum -qy install filebeat
 curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/filebeat/filebeat.yml
 
-sed -i s/ELASTIC_SERVER_IP/$4/g /etc/filebeat/filebeat.yml
+sed -i s/ELASTIC_SERVER_IP/sap-server/g /etc/filebeat/filebeat.yml
 
 systemctl daemon-reload
 systemctl enable filebeat.service
