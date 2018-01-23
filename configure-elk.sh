@@ -9,13 +9,13 @@
 ################################################################################################
 
 # Update everything
-yum -y update --exclude=WALinuxAgent
+yum -qy update --exclude=WALinuxAgent
 
 # Install Java
-yum -y install java-1.8.0-openjdk.x86_64
+yum -qy install java-1.8.0-openjdk.x86_64
 
 # Install Elasticsearch
-yum -y install elasticsearch
+yum -qy install elasticsearch
 
 # Start Elasticsearch service
 systemctl daemon-reload
@@ -23,7 +23,7 @@ systemctl enable elasticsearch.service
 systemctl start elasticsearch.service
 
 # Install Kibana
-yum -y install kibana
+yum -qy install kibana
 
 # Start Kibana service
 systemctl daemon-reload
@@ -31,7 +31,7 @@ systemctl enable kibana.service
 systemctl start kibana.service
 
 # Install Logstash
-yum -y install logstash
+yum -qy install logstash
 
 # Configure Logstash
 mkdir -p /etc/logstash/conf.d

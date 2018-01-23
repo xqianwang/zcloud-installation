@@ -5,13 +5,13 @@ yum-config-manager --enable nodejs
 yum-config-manager --enable wazuh
 
 # Update everything
-yum update -y --exclude=WALinuxAgent
+yum -qy update --exclude=WALinuxAgent
 
 # Install ossec-server
-yum -y install wazuh-manager
+yum -qy install wazuh-manager
 
 # Install ossec-api
-yum -y install nodejs wazuh-api
+yum -qy install nodejs wazuh-api
 
 # Configure ossec-manager
 sed -i s%\<email_to\>recipient@example.wazuh.com\</email_to\>%\<email_to\>$1\</email_to\>%g /var/ossec/etc/ossec.conf
@@ -130,7 +130,7 @@ systemctl start ossec-authd.service
 
 # Install and configure FileBeat
 
-yum -y install filebeat
+yum -qy install filebeat
 curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/filebeat/filebeat.yml
 
 sed -i s/ELASTIC_SERVER_IP/$4/g /etc/filebeat/filebeat.yml
