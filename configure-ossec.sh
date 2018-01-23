@@ -13,8 +13,8 @@ yum -qy install wazuh-manager
 # Install ossec-api
 yum -qy install nodejs wazuh-api
 
-# Install git for openshift-ansible installation
-yum -qy install git
+# Install tools for openshift-ansible installation
+yum -qy install git ansible
 
 # Configure ossec-manager
 sed -i s%\<email_to\>recipient@example.wazuh.com\</email_to\>%\<email_to\>$1\</email_to\>%g /var/ossec/etc/ossec.conf
