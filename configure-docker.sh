@@ -8,7 +8,7 @@
 # agreements you have entered into with The Company.                                           #
 ################################################################################################
 
-yum -qy install net-tools bind-utils bridge-utils yum-utils ansible docker
+yum -qy install bridge-utils ansible docker
 rm -rf /var/cache/yum
 
 echo "Configure docker device mapper"

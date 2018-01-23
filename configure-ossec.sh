@@ -14,7 +14,7 @@ yum -qy install wazuh-manager
 yum -qy install nodejs wazuh-api
 
 # Install tools for openshift-ansible installation
-yum -qy install git ansible
+yum -qy install git ansible wget iptables-services 
 
 # Configure ossec-manager
 sed -i s%\<email_to\>recipient@example.wazuh.com\</email_to\>%\<email_to\>$1\</email_to\>%g /var/ossec/etc/ossec.conf
@@ -130,14 +130,3 @@ EOF
 systemctl daemon-reload
 systemctl enable ossec-authd.service
 systemctl start ossec-authd.service
-
-# Install and configure FileBeat
-
-yum -qy install filebeat
-curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/filebeat/filebeat.yml
-
-sed -i s/ELASTIC_SERVER_IP/sap-server/g /etc/filebeat/filebeat.yml
-
-systemctl daemon-reload
-systemctl enable filebeat.service
-systemctl start filebeat.service
