@@ -349,6 +349,13 @@ setup_epel_gpgkey > /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 setup_elk_gpgkey > /etc/pki/rpm-gpg/ELK-GPG-KEY
 setup_wazuh_gpgkey > /etc/pki/rpm-gpg/GPG-KEY-WAZUH
 setup_nodejs_gpgkey > /etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+rpm --import /etc/pki/rpm-gpg/OpenLogic-GPG-KEY
+rpm --import /etc/pki/rpm-gpg/Docker-GPG-KEY
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+rpm --import /etc/pki/rpm-gpg/ELK-GPG-KEY
+rpm --import /etc/pki/rpm-gpg/GPG-KEY-WAZUH
+rpm --import /etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
 
 yum -qy install yum-utils curl filebeat
 
