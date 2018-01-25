@@ -46,4 +46,10 @@ else
   exit 7
 fi
 
+sed -i '/^HOSTNAME/d' /etc/sysconfig/network
+
+echo "HOSTNAME=`hostname -f`" > /etc/sysconfig/network
+
+systemctl restart network
+
 echo "INFO: Configuration finished!"
