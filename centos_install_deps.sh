@@ -210,7 +210,7 @@ mkdir -p /etc/origin/node/
 echo "server 168.63.129.16" > /etc/origin/node/resolv.conf
 
 #Configure samba 
-RUN /usr/sbin/setsebool -P virt_use_samba on
-RUN /usr/sbin/setsebool -P virt_sandbox_use_samba on
+/usr/sbin/setsebool -P virt_use_samba on
+/usr/sbin/setsebool -P virt_sandbox_use_samba on
 
 echo "Installation finished"
