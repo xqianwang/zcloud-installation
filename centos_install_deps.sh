@@ -165,7 +165,7 @@ setup_epel_gpgkey > /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 sed -i 's/requiretty/!requiretty/g' /etc/sudoers
 
 yum install epel-release -y && yum clean all
-yum install wget git net-tools bind-utils iptables-services bridge-utils bash-completion yum-utils ansible docker -y
+yum install wget git net-tools bind-utils iptables-services bridge-utils bash-completion yum-utils ansible docker samba-client samba-common cifs-utils -y
 rm -rf /var/cache/yum
 
 echo "Configure docker device mapper"
@@ -208,5 +208,9 @@ fi
 
 mkdir -p /etc/origin/node/
 echo "server 168.63.129.16" > /etc/origin/node/resolv.conf
+
+#Configure samba 
+RUN /usr/sbin/setsebool -P virt_use_samba on
+RUN /usr/sbin/setsebool -P virt_sandbox_use_samba on
 
 echo "Installation finished"
