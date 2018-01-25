@@ -35,8 +35,8 @@ if [ $? -ne 0 ]; then
 fi
 
 # Install and configure FileBeat
-curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.0.0-x86_64.rpm
-rpm -vi filebeat-6.0.0-x86_64.rpm
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.1.2-x86_64.rpm
+rpm -vi filebeat-6.1.2-x86_64.rpm
 
 cd /etc/filebeat/
 mv fields.yml filebeat.reference.yml /var/log/
@@ -54,7 +54,7 @@ filebeat.prospectors:
     - /var/opt/jfrog/artifactory/logs/access/logs/access.log
     - /var/log/nginx/access.log
 output.logstash:
-  hosts: ["10.1.6.4:5044"]
+  hosts: ["sap-server:5044"]
 
 EOF
 

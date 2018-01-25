@@ -12,7 +12,7 @@
 yum -qy update --exclude=WALinuxAgent
 
 # Install Java
-yum -qy install java-1.8.0-openjdk.x86_64
+yum -qy install java-1.8.0-openjdk*
 
 # Install Elasticsearch
 yum -qy install elasticsearch
@@ -88,5 +88,5 @@ systemctl start logstash.service
 
 # install filebeat plugin
 /usr/share/logstash/bin/logstash-plugin install logstash-input-beats
-curl -so /etc/filebeat/filebeat-index-template.json https://gist.githubusercontent.com/thisismitch/3429023e8438cc25b86c/raw/d8c479e2a1adcea8b1fe86570e42abab0f10f364/filebeat-index-template.json
+curl -so filebeat-index-template.json https://gist.githubusercontent.com/thisismitch/3429023e8438cc25b86c/raw/d8c479e2a1adcea8b1fe86570e42abab0f10f364/filebeat-index-template.json
 curl -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_template/filebeat?pretty' -d@filebeat-index-template.json
