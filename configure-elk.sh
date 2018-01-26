@@ -24,6 +24,7 @@ systemctl start elasticsearch.service
 
 # Install Kibana
 yum -qy install kibana
+sed -i 's/#server.host: "localhost"/server.host: "0.0.0.0"/' /etc/kibana/kibana.yml
 
 # Start Kibana service
 systemctl daemon-reload
@@ -79,6 +80,8 @@ output {
   }
 }
 EOF
+
+mv /etc/logstash/conf.d/filters.conf ~/logstash-filters.conf
 
 # Start Kibana service
 systemctl daemon-reload
