@@ -358,6 +358,6 @@ rpm --import /etc/pki/rpm-gpg/ELK-GPG-KEY
 rpm --import /etc/pki/rpm-gpg/GPG-KEY-WAZUH
 rpm --import /etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
 
-yum -qy install yum-utils curl wget net-tools bind-utils bash-completion hping3 iptraf-ng iotop tcpdump nmap
+yum -q -y install yum-utils curl wget net-tools bind-utils bash-completion hping3 iptraf-ng iotop tcpdump nmap
 
 echo "Yum repos configured."

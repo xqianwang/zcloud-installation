@@ -5,16 +5,16 @@ yum-config-manager --enable nodejs
 yum-config-manager --enable wazuh
 
 # Update everything
-yum -qy update --exclude=WALinuxAgent
+yum -q -y update --exclude=WALinuxAgent
 
 # Install ossec-server
-yum -qy install wazuh-manager
+yum -q -y install wazuh-manager
 
 # Install ossec-api
-yum -qy install nodejs wazuh-api
+yum -q -y install nodejs wazuh-api
 
 # Install tools for openshift-ansible installation
-yum -qy install git ansible iptables-services 
+yum -q -y install git ansible iptables-services 
 
 # Configure ossec-manager
 sed -i s%\<email_to\>recipient@example.wazuh.com\</email_to\>%\<email_to\>$1\</email_to\>%g /var/ossec/etc/ossec.conf
