@@ -61,3 +61,5 @@ EOF
 systemctl daemon-reload
 systemctl enable filebeat.service
 systemctl start filebeat.service
+
+/usr/sbin/setsebool -P virt_use_samba on
