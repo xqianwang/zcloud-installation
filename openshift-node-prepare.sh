@@ -8,6 +8,11 @@
 # agreements you have entered into with The Company.                                           #
 ################################################################################################
 
+
+#Configure DNS settings for all nodes
+mkdir -p /etc/origin/node/
+echo "server 168.63.129.16" > /etc/origin/node/resolv.conf
+
 yum -q -y install bridge-utils ansible docker samba-client samba-common cifs-utils
 rm -rf /var/cache/yum
 
