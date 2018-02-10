@@ -316,29 +316,6 @@ EOF
 #Common system settings not included in base image
 sed -i 's/requiretty/!requiretty/g' /etc/sudoers
 
-#Configure common network settings for all nodes
-sed -i 's/NM_CONTROLLED=no/NM_CONTROLLED=yes/g' /etc/sysconfig/network-scripts/ifcfg-eth0
-systemctl enable NetworkManager.service
-systemctl restart NetworkManager.service
-
-if [ $? -ne 0 ]; then
-   echo "Error: Cannot configure NetworkManager!"
-   exit 99901
-fi
-
-sed -i '/^HOSTNAME/d' /etc/sysconfig/network
-echo "HOSTNAME=`hostname -f`" > /etc/sysconfig/network
-systemctl restart network
-
-if [ $? -ne 0 ]; then
-   echo "Error: Cannot restart network service!"
-   exit 99902
-fi
-
-mkdir -p /etc/origin/node/
-echo "server 168.63.129.16" > /etc/origin/node/resolv.conf
-echo "Network configured."
-
 #Configure yum repos
 rm -f /etc/yum.repos.d/*
 sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf
