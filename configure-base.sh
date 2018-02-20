@@ -8,6 +8,8 @@
 # agreements you have entered into with The Company.                                           #
 ################################################################################################
 
+set -o pipefail
+
 setup_yum_repo(){
 cat << EOF
 [base]
@@ -313,6 +315,26 @@ Lp+avdanIgi8Cnps/DpMI2KigEHW5mmqihXtfKj0jeE=
 EOF
 }
 
+error_exit(){
+    echo "$1"
+    exit $2
+}
+
+sophos_post_config(){
+    mkdir -p $TALPA_DIR && cd $TALPA_DIR
+    git clone https://github.com/sophos/talpa.git . -b perforce --depth 20 || error_exit "Unable to clone git repository"
+    [[ -f configure ]] || ./bootstrap || error_exit "Unable to bootstrap"
+    [[ -f makefile ]] || ./configure --disable-talpa-build --enable-maintainer-mode || error_exit "Unable to configure"
+    make talpa-srcpack.tar.gz || error_exit "Unable to build Talpa srcpack"
+    if [ -d "$SOPHOS_INST_DIR" ]; then
+        cp -v talpa-srcpack.tar.gz $SOPHOS_INST_DIR/talpa/override/ || error_exit "Unable to copy talpa-srcpack.tar.gz to $SOPHOS_INST_DIR/talpa/override/"
+        $SOPHOS_INST_DIR/engine/talpa_select select || error_exit "Unable to do talpa_select select"
+        $SOPHOS_INST_DIR/bin/savdctl disable || error_exit "Unable to disable on-access"
+        sleep 2
+        $SOPHOS_INST_DIR/bin/savdctl enable || error_exit "Unable to enable on-access"
+    fi
+}
+
 #Common system settings not included in base image
 sed -i 's/requiretty/!requiretty/g' /etc/sudoers
 
@@ -335,6 +357,25 @@ rpm --import /etc/pki/rpm-gpg/ELK-GPG-KEY
 rpm --import /etc/pki/rpm-gpg/GPG-KEY-WAZUH
 rpm --import /etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
 
-yum -q -y install yum-utils curl wget net-tools bind-utils bash-completion hping3 iptraf-ng iotop tcpdump nmap
+yum -q -y install yum-utils curl wget net-tools bind-utils bash-completion hping3 iptraf-ng iotop tcpdump nmap gcc kernel-devel
+
+#install sophos for all nodes
+curl -o sav-9.tgz -u $2:$3 https://artifactory.zcloudcentral.com/artifactory/libs-release-local/sav-linux-free-9.tgz
+SOPHOS_DIR=/home/zafin/sophos
+mkdir $SOPHOS_DIR && tar zxf sav-9.tgz -C $SOPHOS_DIR
+cd $SOPHOS_DIR/sophos-av && ./install.sh --automatic --acceptlicence --enableOnBoot=True --update-source-type=s /opt/sophos-av/
+POST_CONFIG=0
+TALPA_DIR=$SOPHO_DIR/talpa
+SOPHOS_INST_DIR=/opt/sophos-av
+
+if [ $? -ne 0 ]; then
+    POST_CONFIG=1
+fi
+
+if [ $POST_CONFIG -eq 1 ]; then
+    sophos_post_config && echo Successfully installed and configured sophos
+fi
 
 echo "Yum repos configured."
+
+exit 0
