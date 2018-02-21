@@ -373,7 +373,7 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ $POST_CONFIG -eq 1 ]; then
-    sophos_post_config && echo Successfully installed and configured sophos
+    sophos_post_config && echo Successfully installed and configured sophos || echo Cannot do post configuration for sophos talpa.
 fi
 
 echo "Yum repos configured."
